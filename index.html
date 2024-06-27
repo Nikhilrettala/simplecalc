@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Button Click Example</title>
+  <style>
+    .container {
+      width: 200px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #000;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .container input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      text-align: right;
+    }
+    .container input[type="button"] {
+      width: 45px;
+      height: 45px;
+      margin: 5px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p id="p1"></p>
+    <script type="text/javascript">
+      var num1 = '';
+      var num2 = '';
+      var operator = '';
+
+      function getnum(value) {
+        var inputField = document.getElementById('textInput');
+        if (operator === '') {
+          num1 += value;
+          inputField.value = num1;
+        } else {
+          num2 += value;
+          inputField.value = num2;
+        }
+      }
+
+      function op(value) {
+        var inputField = document.getElementById('textInput');
+        if (num1 !== '') {
+          operator = value;
+          inputField.value = '';
+        }
+      }
+
+      function equal() {
+        var inputField = document.getElementById('textInput');
+        var result;
+        var n1 = parseFloat(num1);
+        var n2 = parseFloat(num2);
+
+        switch(operator) {
+          case '+':
+            result = n1 + n2;
+            break;
+          case '-':
+            result = n1 - n2;
+            break;
+          case '*':
+            result = n1 * n2;
+            break;
+          case '/':
+            result = n1 / n2;
+            break;
+          default:
+            result = 'Error';
+        }
+
+        inputField.value = result;
+        num1 = result.toString();
+        num2 = '';
+        operator = '';
+      }
+
+      function clearDisplay() {
+        var inputField = document.getElementById('textInput');
+        inputField.value = '';
+        num1 = '';
+        num2 = '';
+        operator = '';
+      }
+    </script>
+
+    <form name="myForm">
+      <input type="text" id="textInput" name="textInput" readonly>
+      <br/>
+      <input type="button" name="displayButton" value="+" onclick="op('+')">
+      <input type="button" name="displayButton" value="-" onclick="op('-')">
+      <input type="button" name="displayButton" value="" onclick="op('')">
+      <input type="button" name="displayButton" value="/" onclick="op('/')">
+      <input type="button" name="displayButton" value="=" onclick="equal()">
+      <input type="button" name="displayButton" value="C" onclick="clearDisplay()">
+      <br/>
+      <br/>
+      <input type="button" name="displayButton" value="7" onclick="getnum('7')">
+      <input type="button" name="displayButton" value="8" onclick="getnum('8')">
+      <input type="button" name="displayButton" value="9" onclick="getnum('9')">
+      <br/>
+      <br/>
+      <input type="button" name="displayButton" value="4" onclick="getnum('4')">
+      <input type="button" name="displayButton" value="5" onclick="getnum('5')">
+      <input type="button" name="displayButton" value="6" onclick="getnum('6')">
+      <br/><br/>
+      <input type="button" name="displayButton" value="1" onclick="getnum('1')">
+      <input type="button" name="displayButton" value="2" onclick="getnum('2')">
+      <input type="button" name="displayButton" value="3" onclick="getnum('3')">
+      <br/><br/>
+      <input type="button" name="displayButton" value="." onclick="getnum('.')">
+      <input type="button" name="displayButton" value="0" onclick="getnum('0')">
+      <br/><br/>
+    </form>
+  </div>
+</body>
+</html>
